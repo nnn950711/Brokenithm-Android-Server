@@ -329,8 +329,9 @@ void threadInputReceive(SOCKET sHost, IPCMemoryInfo *memory)
             }
 
             int data_left = remains.size();
+            if(data_left == 0) continue;
             real_len = remains[0];
-            if(real_len > data_left)
+            if(real_len + 1 > data_left)
                 continue;
             packet_len = real_len + 1;
             memcpy(buffer, remains.data(), packet_len);
