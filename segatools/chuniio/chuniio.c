@@ -55,7 +55,7 @@ void chuni_io_init_shared_memory()
 
 uint16_t chuni_io_get_api_version(void)
 {
-    return 0x0101;
+    return 0x0102;
 }
 
 HRESULT chuni_io_jvs_init(void)
@@ -177,4 +177,16 @@ static unsigned int __stdcall chuni_io_slider_thread_proc(void *ctx)
     }
 
     return 0;
+}
+
+HRESULT chuni_io_led_init(void)
+{
+    return S_OK;
+}
+
+void chuni_io_led_set_colors(uint8_t board, uint8_t *rgb)
+{
+    if (board == 2 && chuni_io_file_mapping) {
+        memcpy(chuni_io_file_mapping->ledRgbData, rgb, 32 * 3);
+    }
 }

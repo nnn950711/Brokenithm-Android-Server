@@ -201,7 +201,7 @@ static HRESULT aime_io_generate_felica(
 
 uint16_t aime_io_get_api_version(void)
 {
-    return 0x0100;
+    return 0x0101;
 }
 
 HRESULT aime_io_init(void)
@@ -341,3 +341,34 @@ HRESULT aime_io_nfc_get_felica_id(uint8_t unit_no, uint64_t *IDm)
 
 void aime_io_led_set_color(uint8_t unit_no, uint8_t r, uint8_t g, uint8_t b)
 {}
+
+HRESULT aime_io_nfc_get_mifare_uid(uint8_t unit_no, uint8_t *uid, size_t uid_size) { return S_FALSE; }
+HRESULT aime_io_nfc_mifare_select(uint8_t unit_no, const uint8_t *uid, size_t uid_size) { return S_FALSE; }
+HRESULT aime_io_nfc_mifare_set_key(uint8_t unit_no, uint8_t key_type, const uint8_t *key, size_t key_size) { return S_FALSE; }
+HRESULT aime_io_nfc_mifare_authenticate(uint8_t unit_no, uint8_t key_type, const uint8_t *payload, size_t payload_size) { return S_FALSE; }
+HRESULT aime_io_nfc_mifare_read_block(uint8_t unit_no, const uint8_t *uid, size_t uid_size, uint8_t block_no, uint8_t *block, size_t block_size) { return S_FALSE; }
+HRESULT aime_io_nfc_felica_transact(uint8_t unit_no, const uint8_t *req, size_t req_size, uint8_t *res, size_t res_size, size_t *res_size_written) { return S_FALSE; }
+HRESULT aime_io_nfc_radio_on(uint8_t unit_no) { return S_OK; }
+HRESULT aime_io_nfc_radio_off(uint8_t unit_no) { return S_OK; }
+HRESULT aime_io_nfc_to_update_mode(uint8_t unit_no) { return S_OK; }
+HRESULT aime_io_nfc_send_hex_data(uint8_t unit_no, const uint8_t *payload, size_t payload_size, uint8_t *status_out) { return S_OK; }
+
+struct aime_io_vfd_state {
+    uint8_t encoding;
+    uint8_t text_speed;
+    uint8_t scroll_enabled;
+    uint16_t h_scroll;
+    uint16_t cursor_x;
+    uint8_t cursor_y;
+    uint16_t wnd_x0;
+    uint8_t wnd_y0;
+    uint16_t wnd_x1;
+    uint8_t wnd_y1;
+    uint8_t rotate;
+    uint8_t brightness;
+    uint8_t screen_on;
+    uint32_t clear_seq;
+};
+
+void aime_io_vfd_set_text(const uint8_t *text, size_t text_len, const struct aime_io_vfd_state *state) {}
+void aime_io_vfd_set_state(const struct aime_io_vfd_state *state) {}
