@@ -23,5 +23,6 @@ ADD_EXECUTABLE(brokenithm
     src/resources.rc)
 INCLUDE_DIRECTORIES(src)
 LINK_DIRECTORIES(${CMAKE_SOURCE_DIR})
+TARGET_LINK_OPTIONS(brokenithm PRIVATE -static)
 
 TARGET_LINK_LIBRARIES(brokenithm ws2_32)
